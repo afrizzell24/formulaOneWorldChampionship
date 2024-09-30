@@ -1,8 +1,6 @@
 package season2024;
 
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.Random;
 
 /**
@@ -138,9 +136,10 @@ public class Race {
 			}
 		}
 
-		Collections.sort(driverList, Comparator.comparing(Driver::getDriverPoints));
-		Collections.reverse(driverList);
-
+		driverSort(driverList);
+		
+		// This is mostly just a ton of formatting stuff
+		
 		System.out.printf("%1$-10s %2$12s %3$22s", "Team:", "Driver:", "Points:" + "\n\n");
 		for (int i = 0; i < driverList.size(); ++i) {
 			System.out.printf("%1$-15s %2$-20s %3$3s", driverList.get(i).getDriverTeam(),
@@ -175,8 +174,9 @@ public class Race {
 					teamList.get(i).driver1.getPointsInRace() + teamList.get(i).driver2.getPointsInRace());
 		}
 
-		Collections.sort(teamList, Comparator.comparing(Team::getConstructorPoints));
-		Collections.reverse(teamList);
+		teamSort(teamList);
+		
+		// This is mostly formatting stuff for displaying to the console
 
 		System.out.printf("%1$-10s %2$12s", "Team:", "Points:" + "\n\n");
 		for (int i = 0; i < teamList.size(); ++i) {
@@ -187,9 +187,54 @@ public class Race {
 			}
 			System.out.println();
 		}
+		
+		// End of formatting
 
 		return teamList;
 	}
+	
+	/**
+	 * Sorts the list of driver list in descending order based on their driverPoints value
+	 * @param driveList
+	 */
+	private static void driverSort(ArrayList<Driver> driveList) {
+		
+		for (int i = driveList.size() - 1; i > 0; --i) {
+			int maxIndex = i;
+			
+			for (int j = i - 1; j >= 0; --j) {
+				if (driveList.get(j).getDriverPoints() < driveList.get(maxIndex).getDriverPoints()) {
+					maxIndex = j;
+				}
+			}
+			
+			Driver temp = driveList.get(i);
+			driveList.set(i, driveList.get(maxIndex));
+			driveList.set(maxIndex, temp);
+		}
+	}
+	
+	/**
+	 * Sorts the list of teams in descending order based on their constructorPoints value
+	 * @param teamsList
+	 */
+	private static void teamSort(ArrayList<Team> teamsList) {
+		
+		for (int i = teamsList.size() - 1; i > 0; --i) {
+			int maxIndex = i;
+			
+			for (int j = i - 1; j >= 0; --j) {
+				if (teamsList.get(j).getConstructorPoints() < teamsList.get(maxIndex).getConstructorPoints()) {
+					maxIndex = j;
+				}
+			}
+			
+			Team temp = teamsList.get(i);
+			teamsList.set(i, teamsList.get(maxIndex));
+			teamsList.set(maxIndex, temp);
+		}
+	}
+	
 
 	/**
 	 * The championship points distribution for the final positions of a Formula One race.
