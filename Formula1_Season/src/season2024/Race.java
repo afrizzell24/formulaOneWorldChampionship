@@ -142,12 +142,12 @@ public class Race {
 		
 		System.out.printf("%1$-10s %2$12s %3$22s", "Team:", "Driver:", "Points:" + "\n\n");
 		for (int i = 0; i < driverList.size(); ++i) {
-			System.out.printf("%1$-15s %2$-20s %3$3s", driverList.get(i).getDriverTeam(),
+			System.out.printf("%1$-15s %2$-21s %3$3s", driverList.get(i).getDriverTeam(),
 							  driverList.get(i).getDriverName(), 
 							  String.valueOf(driverList.get(i).getDriverPoints()));
 
 			if (driverList.get(i).getPointsInRace() != 0) {
-				System.out.printf("%1$7s", "+" + String.valueOf(driverList.get(i).getPointsInRace()));
+				System.out.printf("%1$10s", "+" + String.valueOf(driverList.get(i).getPointsInRace()));
 			}
 
 			if (driverList.get(i).equals(fastestDriver) && (driverList.get(i).getPointsInRace() != 0)) {
@@ -167,7 +167,7 @@ public class Race {
 	 * @return
 	 */
 	public ArrayList<Team> getConstructorsChampResults() {
-		System.out.println("\nHere are your Constructor's Champoinship Standings: \n");
+		System.out.println("\nHere are your Constructor's Championship Standings: \n");
 
 		for (int i = 0; i < teamList.size(); ++i) {
 			teamList.get(i).updateConstructorPoints(
@@ -180,10 +180,10 @@ public class Race {
 
 		System.out.printf("%1$-10s %2$12s", "Team:", "Points:" + "\n\n");
 		for (int i = 0; i < teamList.size(); ++i) {
-			System.out.printf("%1$-15s %2$-20s", teamList.get(i).getTeamName(), teamList.get(i).getConstructorPoints());
+			System.out.printf("%1$-15s %2$-10s", teamList.get(i).getTeamName(), teamList.get(i).getConstructorPoints());
 
 			if (teamList.get(i).getRacePoints() != 0) {
-				System.out.printf("%1$7s", "+" + String.valueOf(teamList.get(i).getRacePoints()));
+				System.out.print("+" + String.valueOf(teamList.get(i).getRacePoints()));
 			}
 			System.out.println();
 		}
